@@ -10,10 +10,10 @@ import type {
  * Set VITE_N8N_WEBHOOK_URL to the n8n Production Webhook URL.
  * Nothing else in the app needs to change.
  */
-export const WEBHOOK_URL: string = (import.meta.env.VITE_N8N_WEBHOOK_URL ?? "").trim();
+export const WEBHOOK_URL: string = (import.meta.env['VITE_N8N_WEBHOOK_URL'] ?? "").trim();
 
 /** Explicitly enable the development fallback with VITE_ENABLE_DEMO_MODE=true. */
-const DEMO_MODE_ENABLED = String(import.meta.env.VITE_ENABLE_DEMO_MODE ?? "") === "true";
+const DEMO_MODE_ENABLED = String(import.meta.env['VITE_ENABLE_DEMO_MODE'] ?? "") === "true";
 
 /** Request timeout in milliseconds. */
 const REQUEST_TIMEOUT_MS = 60_000;
@@ -41,7 +41,7 @@ function logTechnical(context: string, detail: unknown): void {
 
 function fail(message: string, detail?: string): BackgroundRemovalError {
   if (detail) logTechnical(message, detail);
-  return { message, detail };
+  return detail ? { message, detail } : { message };
 }
 
 async function fileToBase64(file: File): Promise<string> {

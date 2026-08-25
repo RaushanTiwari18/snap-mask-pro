@@ -8,7 +8,7 @@ export const ACCEPTED_MIME_TYPES = [
 export const ACCEPTED_EXTENSIONS = ".jpg,.jpeg,.png,.webp";
 
 /** Maximum upload size in megabytes (configurable). */
-export const MAX_FILE_SIZE_MB = Number(import.meta.env.VITE_MAX_FILE_SIZE_MB ?? 10);
+export const MAX_FILE_SIZE_MB = Number(import.meta.env['VITE_MAX_FILE_SIZE_MB'] ?? 10);
 export const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 
 export function formatBytes(bytes: number): string {
