@@ -5,11 +5,11 @@ import { Logo } from "./Logo";
 import { CTALink } from "./CTAButton";
 
 const links = [
-  { label: "Home", to: "/" as const, hash: undefined },
+  { label: "Home", to: "/" as const },
   { label: "How It Works", to: "/" as const, hash: "how-it-works" },
-  { label: "FAQ", to: "/faq" as const, hash: undefined },
-  { label: "About", to: "/about" as const, hash: undefined },
-];
+  { label: "FAQ", to: "/faq" as const },
+  { label: "About", to: "/about" as const },
+] satisfies { label: string; to: "/" | "/faq" | "/about"; hash?: string }[];
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -27,7 +27,7 @@ export function Navbar() {
             <li key={l.label}>
               <Link
                 to={l.to}
-                hash={l.hash}
+                {...(l.hash ? { hash: l.hash } : {})}
                 className="text-muted-foreground hover:text-foreground rounded-lg px-3 py-2 text-sm font-medium transition-colors"
               >
                 {l.label}
@@ -60,7 +60,7 @@ export function Navbar() {
               <li key={l.label}>
                 <Link
                   to={l.to}
-                  hash={l.hash}
+                  {...(l.hash ? { hash: l.hash } : {})}
                   onClick={() => setOpen(false)}
                   className="hover:bg-muted block rounded-lg px-3 py-3 text-sm font-medium"
                 >
